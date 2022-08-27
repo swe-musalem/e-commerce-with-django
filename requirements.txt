@@ -1,5 +1,5 @@
 asgiref==3.5.2
-backports.zoneinfo==0.2.1
+# backports.zoneinfo==0.2.1 returns error => Could not build wheels for backports.zoneinfo, which is required to install pyproject.toml-based projects
 Django==4.0
 sqlparse==0.4.2
 tzdata==2022.2
