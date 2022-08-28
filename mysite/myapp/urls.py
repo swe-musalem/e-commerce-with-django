@@ -9,5 +9,5 @@ urlpatterns = [
     path('app/',views.index),
     path('products/',views.products),
     #specify the data type and send it to the parameter in the view function
-    path('products/<int:id>/', views.product_detail),
+    path('products-detail/<int:id>/', views.product_detail),
 ]
