@@ -9,8 +9,15 @@
 <body>
     {% comment %} products from the function  {% endcomment %}
     {% for product in products %}
-                            {% comment %} passed from the for loop     {% endcomment %}
-        <a href="/myapp/products-detail/{{ product.id }}"> {{ product.name }} </a>
+        {% comment %} passed from the for loop  {% endcomment %}
+
+        {% comment %} "/myapp/products-detail/{{ product.id }} => Hardcoded Url (bad practice)"  {% endcomment %}
+
+        {% comment %} the dynamic part where we stored the long url at url.py {% endcomment %}
+        {% comment %} myapp:url => namespacing to avoid similar url names if you have multiable apps {% endcomment %}
+        <a href="{% url 'myapp:product_detail' product.id %}"> 
+            {{ product.name }} 
+        </a>
     {% endfor %}
 </body>
 </html>
