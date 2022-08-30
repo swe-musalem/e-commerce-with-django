@@ -1,12 +1,19 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
     <title>Document</title>
 </head>
 <body>
+
+
+
+
+    
     {% comment %} products from the function  {% endcomment %}
     {% for product in products %}
         {% comment %} passed from the for loop  {% endcomment %}
@@ -15,7 +22,7 @@
 
         {% comment %} the dynamic part where we stored the long url at url.py {% endcomment %}
         {% comment %} myapp:url => namespacing to avoid similar url names if you have multiable apps {% endcomment %}
-        <a href="{% url 'myapp:product_detail' product.id %}"> 
+        <a class="text-grey" href="{% url 'myapp:product_detail' product.id %}" > 
             {{ product.name }} 
         </a>
     {% endfor %}
