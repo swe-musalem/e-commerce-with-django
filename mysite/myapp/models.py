@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from operator import mod
 from django.db import models
 
@@ -6,7 +7,7 @@ from django.db import models
 """
 remebmer to add "myapp" to installed apps
 
-not a real sql code yntil you do migration
+not a real sql code until you do migration
 
 commands:
     python manage.py makemigrations
@@ -23,6 +24,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100 , blank=False)
     price = models.IntegerField(blank=False)
     desc = models.TextField(max_length=200, blank=True)
-
+                            # you need to set media root and media url
+    image = models.ImageField(blank=True, upload_to='images')
     def __str__(self):
         return self.name
