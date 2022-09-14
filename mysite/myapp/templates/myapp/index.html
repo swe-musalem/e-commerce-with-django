@@ -3,10 +3,57 @@
 
 
 {% block content %}
-    {% for product in products %}
+    {% comment %} {% for product in products %}
 
         <a href="{% url 'myapp:products_detail' product.id %}"> {{product.name}} </a>
 
-    {% endfor %}
+    {% endfor %} {% endcomment %}
+
+    
+    <main class="px-24 py-24">
+        <div>
+            <div >
+               <div class="flex flex-col items-center justify-center ">
+                   <div class="flex flex-col items-center mb-4">
+                        <h1 class="text-green-500 font-bold text-4xl">
+                            welcome to the everything market
+                        </h1>
+
+                        <h3 class="font-bold py-2 text-2xl">
+                            everything is everything
+                        </h3>
+                        <div class=" w-1/2 font-semibold text-xl">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero error libero explicabo magni animi odio nemo aliquid quis atque quia, perferendis facere nesciunt a minus ratione. Quia, perferendis? Esse, culpa.
+                        </div>
+                   </div>
+
+                   <div class="flex flex-col w-1/2 justify-center items-center">
+                        <a class="bg-green-500 w-1/2 flex justify-center rounded" href="#">
+                            <div class="text-xl md:my-2 text-white">
+                                new stuff
+                            </div>
+                        </a>
+
+                        <a class="my-8 bg-green-500 w-1/2 flex justify-center rounded" href="#">
+                            <div class="text-xl md:my-2 text-white">
+                                cursed items
+                            </div>
+                        </a>
+
+                        <a class="bg-green-500 w-1/2 flex justify-center rounded" href="#">
+                            <div class="text-xl my-2 text-white">
+                                blessed items
+                            </div>
+                        </a>
+                   </div>
+                </div>
+            </div> 
+        </div>
+    </main>
+    {% comment %} end of site hero {% endcomment %}
+
+
+
+
 {% endblock content %}
 
