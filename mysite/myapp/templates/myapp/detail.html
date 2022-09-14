@@ -1,5 +1,44 @@
 {% extends 'myapp/base.html' %}
 {% load static %}
-{{ product.name }}
-{{ product.price }}
-{{ product.desc }}
+{% block content %}
+<div class="p-10">
+    <div class="flex flex w-3/4 rounded shadow-lg relative">
+        <div class="w-1/4 p-4">
+            <img src="{{product.image.url}}" alt="">
+        </div>
+        <div class="p-4 flex flex-col ">
+            <div class="font-semibold">
+                {{ product.name }}
+            </div>
+
+            <div class="text-green-500 text-2xl">
+                {{ product.price }} <sub class="text-sm">SAR</sub>
+            </div>
+
+            <div class=" w-1/2">
+                {{ product.desc }}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam minima ut nihil deleniti dicta autem quibusdam qui nostrum debitis laudantium porro ipsum ea amet officia labore, doloribus fugit. Doloribus, magni!
+            </div>
+        </div>
+
+        <div class="absolute right-0 bottom-0">
+            <div class="flex w-72 justify-evenly mb-6">
+                <div class="text-xl">
+                    <button  class="bg-green-400 p-2 rounded text-white">
+                        order now
+                    </button >
+                    
+                </div>
+    
+                <div class="text-xl">
+                   <button class="bg-green-500 p-2 rounded text-white">
+                        add to cart
+                   </button> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+</div>
+{% endblock content %}
