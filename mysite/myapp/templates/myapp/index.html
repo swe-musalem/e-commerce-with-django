@@ -52,11 +52,11 @@
     </main>
     {% comment %} end of site hero {% endcomment %}
 
-    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 xl:grid-cols-4 lg:grid-cols-4 ">
+    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 xl:grid-cols-6 lg:grid-cols-4 ">
         {% comment %} card layout start {% endcomment %}
         {% for product in products %}
 
-        <div class="p-10">
+        <div class="p-10 ">
 
             <a href="{% url 'myapp:products_detail' product.id %}" class="flex flex-col rounded border-2 border-gray-100 shadow-xl"> 
                 
@@ -65,13 +65,13 @@
                 </div>
                     
                 
-                <div class="p-4">
+                <div class="p-4 truncate overflow-hidden ">
                     <div>
                         <div class="">
                             {{product.name}}
                         </div>
 
-                        <div class="">
+                        <div class="truncate">
                             {{product.desc}}
                         </div>
                     </div>
@@ -94,4 +94,3 @@
 
 
 {% endblock content %}
-
