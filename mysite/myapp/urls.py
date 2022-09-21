@@ -11,4 +11,5 @@ urlpatterns = [
     path('products/',views.products),
     #specify the data type and send it to the parameter in the view function
     path('products_detail/<int:id>/', views.product_detail, name='products_detail'),
+    path('products/add',views.addProduct,name='add_product')
 ]

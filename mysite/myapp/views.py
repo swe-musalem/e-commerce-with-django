@@ -2,7 +2,6 @@ from itertools import product
 from multiprocessing import context
 from django.shortcuts import render
 from django.http import HttpResponse
-# from .Prosuctssheet import *
 from .models import Product
 
 
@@ -44,3 +43,27 @@ def product_detail(request,id):
         'product': product
     }
     return render(request,'myapp/detail.html',context)
+
+
+
+def addProduct(request):
+    
+    if request.method == "POST":
+        # get parameter are the name and id from the template
+        name = request.POST.get('name')
+        price = request.POST.get('price')
+        desc = request.POST.get('desc')
+        # images cannot be posted
+        image = request.FILES['upload']
+        # so far these data are not stored to db
+        product = Product(name=name,price=price,desc=desc,image=image)
+        product.save()
+        import requests
+
+        r = requests.post("https://sheetdb.io/api/v1/106hkqvnar7mu", headers={}, json={"data": { "name":name,"price":price,"id":product.id } })
+
+        if r.status_code != 201:
+             print("error")
+	
+
+    return render(request,'myapp/addproduct.html')
