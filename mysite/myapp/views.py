@@ -1,9 +1,12 @@
 from itertools import product
+from logging import error
 from multiprocessing import context
+from pyexpat import model
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Product
 
+from django.core.exceptions import ObjectDoesNotExist
 
 def index(request):
     return HttpResponse("somesing")
@@ -67,3 +70,16 @@ def addProduct(request):
 	
 
     return render(request,'myapp/addproduct.html')
+
+def updateProduct(request,id):
+    
+   
+    try:
+        product = Product.objects.get(id=id)
+        context = {
+        'product': product
+    }
+        return render(request,'myapp/updateProduct.html',context)
+    except ObjectDoesNotExist:
+        return HttpResponse("the error is") 
+    

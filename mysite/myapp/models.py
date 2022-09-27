@@ -20,7 +20,7 @@ to see the table at admin pannel you have to register at admin file
 """
 
 class Product(models.Model):
-    id = models.AutoField(primary_key=True)
+    
     name = models.CharField(max_length=100 , blank=False)
     price = models.IntegerField(blank=False)
     desc = models.TextField(max_length=200, blank=True)
