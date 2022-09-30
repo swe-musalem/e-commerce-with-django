@@ -76,8 +76,14 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3', => default
+        'ENGINE': 'django.db.backends.postgresql',
+        #  'NAME': BASE_DIR / 'db.sqlite3', => default
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'GChOU5FORUrcoiLFR3RV', #it's not a good practise to leave password without env varaibles but i suppose no one will see the project ^_^ 
+        'HOST': 'containers-us-west-53.railway.app',
+        'PORT': '6394',
     }
 }
 
