@@ -5,7 +5,6 @@ from pyexpat import model
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Product
-
 from django.core.exceptions import ObjectDoesNotExist
 
 def index(request):
@@ -73,13 +72,19 @@ def addProduct(request):
 
 def updateProduct(request,id):
     
-   
     try:
         product = Product.objects.get(id=id)
-        context = {
-        'product': product
-    }
+        context = { 'product': product
+                                        }
+
         return render(request,'myapp/updateProduct.html',context)
-    except ObjectDoesNotExist:
-        return HttpResponse("the error is") 
+    except ObjectDoesNotExist as error:
+        context = {
+            'errorName':error,
+            'errorDesc':'this occurs when querying about deleted product or doesn\'t exist',
+            'errorCode':'204',
+            
+        }
+        # in the same url return different template so no need for url
+        return render(request,'myapp/errorPage.html',context)
     
