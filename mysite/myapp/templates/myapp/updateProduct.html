@@ -4,14 +4,15 @@
 
 {% block content %}
                 <form method="POST" enctype="multipart/form-data">
-                    <div class="flex flex-col bg-gray-300  gap-5  rounded-2xl h-96 p-8">
+                    <div class="flex flex-col bg-gray-300  gap-4  rounded-2xl h-96 p-8 h-auto">
                         <div class=" text-center text-2xl font-medium text-white">Update Product</div>
                         {% csrf_token %}
                         <input type="text" placeholder="Name" name="name" id="name" value="{{ product.name }}" class="rounded p-2">
-                        <input type="number" placeholder="price" name="price" id="price" class="rounded p-2 ">
-                        <input type="text" placeholder="desc" name="desc" id="desc" class="rounded p-2">
-                        <input type="file" placeholder="image" accept="image/*" name="upload" id="upload">
-                        <input type="submit" value="Add Product" name="Update Product" class="  p-2 bg-green-500 rounded text-white font-medium" >
+                        <input type="number" placeholder="price" name="price" id="price" value="{{ product.price }}" class="rounded p-2 ">
+                        <input type="text" placeholder="desc" name="desc" id="desc" value="{{ product.desc }}" class="rounded p-2">
+                        <img src="{{product.image.url}}" alt="" class="w-20 h-20" srcset="" >
+                        <input type="file" placeholder="image" accept="image/*" name="upload" >
+                        <input type="submit" value="Update Product" name="Update Product" class=" p-1  bg-green-500 rounded text-white font-medium" >
                     </div>
                 </form>
 {% endblock content %}

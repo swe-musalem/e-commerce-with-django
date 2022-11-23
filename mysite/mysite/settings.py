@@ -25,13 +25,14 @@ SECRET_KEY = 'django-insecure-e@vjb2-o66zk!*heh#gx^o@hvkcf&e4+7cah_0$-2qvc!x3y20
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'myapp',
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -81,7 +82,7 @@ DATABASES = {
         #  'NAME': BASE_DIR / 'db.sqlite3', => default
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': 'GChOU5FORUrcoiLFR3RV', #it's not a good practise to leave password without env varaibles but i suppose no one will see the project ^_^ 
+        'PASSWORD': 'G6tvq1Mokx8qRBTqPz3B', #it's not a good practise to leave password without env varaibles but i suppose no one will see the project ^_^ 
         'HOST': 'containers-us-west-53.railway.app',
         'PORT': '6394',
     }
