@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <script src="https://kit.fontawesome.com/2564f6edaa.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
         <title>Document</title>
     </head>
@@ -14,7 +14,7 @@
     <body >
         <nav>
             <div class="shadow-md">
-                <div class="px-8 py-4 ">
+                <div class="px-8 py-4 relative">
                     <div class="flex items-center">
                         <a class="flex items-center" href="#">
                             <img src="{%static 'myapp/images/logo.png' %}" alt="icon" class="w-12 h-12">
@@ -38,6 +38,19 @@
                                 <a href="#">cart</a>
                             </div>
                         </div>
+                        {% if user.is_authenticated  %}
+                        <a href="{% url 'users:logout' %}" class="absolute right-10 border-green-500 border-2 p-2 rounded-full"> 
+                            <span> Logout </span>
+                            <span class="text-green-500"> <i class="fa-solid fa-user"></i> </span> 
+                            
+                        </a>
+                        {% else %}
+                        <a href="{% url 'users:login' %}" class="absolute right-10 border-green-500 border-2 p-2 rounded-full"> 
+                            <span> Login </span>
+                            <span class="text-green-500"> <i class="fa-solid fa-user"></i> </span> 
+                            
+                        </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

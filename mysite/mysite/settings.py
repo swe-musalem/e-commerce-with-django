@@ -133,3 +133,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # those need to defined at main mysite/urls.py 
 MEDIA_ROOT = BASE_DIR/'media'
 MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = 'myapp:products'
+# when ever the user need to login he will be redirected to this url
+LOGIN_URL = 'users:login'

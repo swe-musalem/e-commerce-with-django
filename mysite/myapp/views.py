@@ -57,7 +57,7 @@ def addProduct(request):
         name = request.POST.get('name')
         price = request.POST.get('price')
         desc = request.POST.get('desc')
-        print(len(name))
+        
         
         # images cannot be posted
         image = request.FILES['upload']
