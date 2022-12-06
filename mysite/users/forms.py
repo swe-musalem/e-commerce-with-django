@@ -6,6 +6,11 @@ from django.contrib.auth.models import User
 from django import forms
 
 
+"""
+since User model is defined by django editing might be hard, and best solution is to create a new model and connect it to User model 
+
+"""
+
 # edit the layout of the input field next to required 
 class NewUserForm(UserCreationForm):
     username = forms.CharField(required=True , widget=forms.TextInput(attrs={'class':'focus:outline-none w-full '}))

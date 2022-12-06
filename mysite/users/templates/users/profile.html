@@ -1,4 +1,7 @@
 {% extends 'myapp/base.html' %}
 {% block content %}
+<!-- user object is already passed by django -->
 {{ user.username }}
+<!-- we access through user object then profile object then the value -->
+<img src="{{ user.profile.image.url }}" alt="" srcset="">
 {% endblock %}
