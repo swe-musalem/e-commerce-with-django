@@ -1,7 +1,36 @@
 {% extends 'myapp/base.html' %}
 {% block content %}
 <!-- user object is already passed by django -->
-{{ user.username }}
+<!-- {{ user.username }} -->
 <!-- we access through user object then profile object then the value -->
-<img src="{{ user.profile.image.url }}" alt="" srcset="">
+
+
+
+<div class=" w-full sm:w-3/4 relative h-screen p-4">
+    <div class="flex flex-row shadow-lg absolute sm:left-10 sm:top-20 top-10 w-3/4">
+
+        <div class="h-full w-40">
+            <img class="rounded-full m-2 border-2 border-green-500 object-cover" src="{{ user.profile.image.url }}" alt="" srcset="">
+        </div>
+
+        <div class="flex flex-col justify-evenly pl-3 text-green-500">
+            <div>
+                <span>username: </span>{{ user.username }}
+            </div>
+            <div class="">
+                <span>phone number: </span>{{user.profile.connect_number}}
+            </div>
+
+            <div>
+                <span class="text-yellow-400">
+                    primuem member
+                </span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
 {% endblock %}
