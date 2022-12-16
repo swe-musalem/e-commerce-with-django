@@ -1,6 +1,7 @@
 from multiprocessing import context
 from django.shortcuts import render , redirect
 from .forms import NewUserForm
+from .models import Profile
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -34,3 +35,12 @@ def register(request):
 # if you are not logged in  you will be redirected to the specifc url in LOGIN_URL='<url>' to log in and see the page 
 def profile(request):
    return render(request , 'users/profile.html')
+
+def createProfile(request):
+   if request.method == 'POST':
+      connect_number = request.POST.get('connect_number')
+      image = request.FILES['upload']
+      user = request.user
+      profile = Profile(user=user , connect_number = connect_number , image = image)
+      profile.save()
+   return render(request , 'users/createProfile.html')
