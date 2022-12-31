@@ -2,11 +2,13 @@
 {% load static %}
 {% block content %}
 <div class="p-10">
-    <div class="flex flex w-3/4 rounded shadow-lg relative">
+    <div class=" flex w-3/4 rounded shadow-lg relative">
         <div class="w-1/4 p-4">
             <img src="{{product.image.url}}" alt="">
         </div>
+
         <div class="p-4 flex flex-col ">
+
             <div class="font-semibold">
                 {{ product.name }}
             </div>
@@ -14,11 +16,18 @@
             <div class="text-green-500 text-2xl">
                 {{ product.price }} <sub class="text-sm">SAR</sub>
             </div>
-{% comment %}  {% endcomment %}
+
             <div class=" w-1/2">
                 {{ product.desc }}
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam minima ut nihil deleniti dicta autem quibusdam qui nostrum debitis laudantium porro ipsum ea amet officia labore, doloribus fugit. Doloribus, magni!
             </div>
+            <div>
+                Posted by :
+                <a href="{% url 'users:sellerProfile' product.seller_name.id %}" class="text-blue-600">
+                    {{product.seller_name}}
+                </a> 
+                 </div>
+            <div>{{product.seller_name.profile.connect_number}} </div>
         </div>
 
         <div class="absolute right-0 bottom-0">

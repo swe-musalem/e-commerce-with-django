@@ -27,15 +27,22 @@
                         </div>
     
                         <div class="flex justify-evenly  text-xl w-1/4">
+
                             <div>
-                                <a href="#"  class="border-b-2 border-green-500"> home</a>
+                                <a href="{% url 'myapp:products' %}"  class="border-b-2 border-green-500">Home</a>
                             </div>
+
                             <div>
                                 
-                                <a href="#">store</a>
+                                <a href="{% url 'myapp:add_product'%}">Post an Add</a>
                             </div>
+
                             <div>
                                 <a href="#">cart</a>
+                            </div>
+
+                            <div>
+                                <a href="{% url 'users:profile' %}" class="">profile</a>
                             </div>
                         </div>
                         {% if user.is_authenticated  %}
@@ -51,6 +58,7 @@
                             
                         </a>
                         {% endif %}
+                        
                     </div>
                 </div>
             </div>

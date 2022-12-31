@@ -7,11 +7,11 @@ app_name = 'myapp'
 
 """root url myapp/ """
 urlpatterns = [
-    path('app/',views.index),
-    path('products/',views.products, name='products'),
+    path('products/',views.ProductListview.as_view(), name='products'),
     #specify the data type and send it to the parameter in the view function
-    path('products_detail/<int:id>/', views.product_detail, name='products_detail'),
+    # in class based view refere to the primary key parameter in url as pk
+    path('products_detail/<int:pk>/', views.ProductDetailView.as_view(), name='products_detail'),
     path('products/add',views.addProduct,name='add_product'),
-    path('products/update/<int:id>/',views.updateProduct,name='update_product')
-    
+    path('products/update/<int:id>/',views.updateProduct,name='update_product'),
+    path('userlisting/',views.user_listing, name='userlisting'),
 ]

@@ -7,10 +7,9 @@ from django.shortcuts import render ,redirect
 from django.http import HttpResponse
 from .models import Product
 from django.core.exceptions import ObjectDoesNotExist
-
-def index(request):
-    return HttpResponse("somesing")
-
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView, DetailView
 
 
 """
@@ -22,13 +21,20 @@ the id is passed through the link
 
 """
 
-def products(request):
-    products = Product.objects.all()
-    context = {
-        "products":products
-    }
+# def products(request):
+#     products = Product.objects.all()
+#     context = {
+#         "products":products
+#     }
     
-    return render(request, 'myapp/index.html',context)
+#     return render(request, 'myapp/index.html',context)
+
+# convertd to CBV below
+
+class ProductListview(ListView):
+    model = Product
+    template_name = 'myapp/index.html'
+    context_object_name = 'products'
 
 """
 
@@ -38,17 +44,23 @@ accesing the details of the product through url/id:
 
 """
 
-def product_detail(request,id):
-    product = Product.objects.get(id=id)
+# def product_detail(request,id):
+#     product = get_object_or_404(Product,id=id)
     
     
-    context = {
-        'product': product
-    }
-    return render(request,'myapp/detail.html',context)
+    
+#     context = {
+#         'product': product
+#     }
+#     return render(request,'myapp/detail.html',context)
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'myapp/detail.html'
+    context_object_name = 'product'
 
 
-
+@login_required
 def addProduct(request):
     
     if request.method == "POST":
@@ -57,14 +69,15 @@ def addProduct(request):
         name = request.POST.get('name')
         price = request.POST.get('price')
         desc = request.POST.get('desc')
-        
+        seller_name = request.user
         
         # images cannot be posted
         image = request.FILES['upload']
         # so far these data are not stored to db
-        product = Product(name=name,price=price,desc=desc,image=image)
+        product = Product(name=name,price=price,desc=desc,image=image,seller_name=seller_name)
         product.save()
-        eval(name)
+        
+
         import requests
 
         r = requests.post("https://sheetdb.io/api/v1/106hkqvnar7mu", headers={}, json={"data": { "name":name,"price":price,"id":product.id } })
@@ -83,28 +96,39 @@ def updateProduct(request,id):
 
 
     """
-    try:
-        product = Product.objects.get(id=id)
-        context = { 'product': product } # get the data ato the form
-        if request.method == "POST":
-            # overwriting the exisiting objects from the form request 
-            product.name = request.POST.get('name')
-            product.price = request.POST.get('price')
-            product.desc = request.POST.get('desc')
+    product = get_object_or_404(Product,id=id)
+    context = { 'product': product }
+    return render(request,'myapp/updateProduct.html',context)
+    # try:
+    #     product = Product.objects.get(id=id)
+    #     context = { 'product': product } # get the data ato the form
+    #     if request.method == "POST":
+    #         # overwriting the exisiting objects from the form request 
+    #         product.name = request.POST.get('name')
+    #         product.price = request.POST.get('price')
+    #         product.desc = request.POST.get('desc')
         
-            product.image = request.FILES['upload']
-            product.save()
-            return redirect('/myapp/products')
-        return render(request,'myapp/updateProduct.html',context)
+    #         product.image = request.FILES['upload']
+    #         product.save()
+    #         return redirect('/myapp/products')
+    #     return render(request,'myapp/updateProduct.html',context)
         
     
-    except ObjectDoesNotExist as error:
-        context = {
-            'errorName':error,
-            'errorDesc':'this occurs when querying about deleted product or doesn\'t exist',
-            'errorCode':'204',
+    # except ObjectDoesNotExist as error:
+    #     context = {
+    #         'errorName':error,
+    #         'errorDesc':'this occurs when querying about deleted product or doesn\'t exist',
+    #         'errorCode':'204',
             
-        }
-        # in the same url return different template so no need for url
-        return render(request,'myapp/errorPage.html',context)
+    #     }
+    #     # in the same url return different template so no need for url
+    #     return render(request,'myapp/errorPage.html',context)
     
+
+def user_listing(request):
+    product = Product.objects.filter(seller_name=request.user)
+
+    context = {
+        'product':product
+    }
+    return render(request,'myapp/userListing.html',context)
