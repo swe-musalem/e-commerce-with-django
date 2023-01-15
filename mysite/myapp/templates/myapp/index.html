@@ -11,45 +11,20 @@
     {% endfor %} {% endcomment %}
 
     
-<div class="relative">
+<div class="">
     <main>        
+        
         <div class="px-24 py-24 ">
-            <div >
-               <div class="flex flex-col items-center justify-center ">
-                   <div class="flex flex-col items-center mb-4">
-                        <h1 class="text-green-500 font-bold text-4xl">
-                            welcome to the everything market
-                        </h1>
-
-                        <h3 class="font-bold py-2 text-2xl">
-                            everything is everything
-                        </h3>
-                        <div class=" w-1/2 font-semibold text-xl">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero error libero explicabo magni animi odio nemo aliquid quis atque quia, perferendis facere nesciunt a minus ratione. Quia, perferendis? Esse, culpa.
-                        </div>
-                   </div>
-
-                   <div class="flex flex-col w-1/2 justify-center items-center">
-                        <a class="bg-green-500 w-1/2 flex justify-center rounded" href="#">
-                            <div class="text-xl md:my-2 text-white">
-                                rare items
-                            </div>
-                        </a>
-
-                        <a class="my-8 bg-green-500 w-1/2 flex justify-center rounded" href="#">
-                            <div class="text-xl md:my-2 text-white">
-                                good old items
-                            </div>
-                        </a>
-
-                        <a class="bg-green-500 w-1/2 flex justify-center rounded" href="#">
-                            <div class="text-xl my-2 text-white">
-                                new items
-                            </div>
-                        </a>
-                   </div>
-                </div>
-            </div> 
+            
+            {%for homeimage in homeimages %}
+            <!--
+                data-imagenumber comes from the backend which is the length of array
+            -->
+            <div id="imageContainer" class="w-full flex justify-center">
+                <img onclick="imageSlide()" data-imagenumber="{{homeImagesCount}}" class="hidden" id="image" src="{{homeimage.image.url}}" alt="" srcset="">
+            </div>
+                
+            {% endfor %}        
         </div>
         
     </main>
@@ -63,10 +38,10 @@
 
         <div class="pl-5 pr-5 pb-5 ">
 
-            <a href="{% url 'myapp:products_detail' product.id %}" class="flex flex-col rounded border-2 border-gray-100 shadow-xl"> 
+            <a href="{% url 'myapp:products_detail' product.id %}" class="flex flex-col rounded border-2 h-full  border-gray-100 shadow-xl"> 
                 
-                <div class="pt-2">
-                    <img src="{{product.image.url}}" alt="" srcset="">
+                <div class="">
+                    <img src="{{product.image.url}}" class="aspect-square" alt="" srcset="">
                 </div>
                 
                 
@@ -93,6 +68,38 @@
         </div>
         {% endfor %}
     </div>
+<script>
+    const image = document.getElementById("image");
+    
+    
+    let str = "media/home_images/image1.jpg".slice(0,23)
+    console.log(str)
+    
+    //image.setAttribute("src","{{homeImagesCount}}".slice(0,23)+imageCounter+".jpg")
+    
+    image.classList = "visible"
+    
+    /// media/home_images/image1.jpg
 
+    let imageCounter = 1;
+    
+    const imageSlide =  ()=>{
+            // instaed of using array and apprend elements to it we are just editing the source of the image with fixed suffix image<number> 
+            //image.setAttribute("src",`/media/home_images/image1.jpg`);
+            image.setAttribute("src",`/media/home_images/image${imageCounter}.jpg`);
+            console.log(image.getAttribute("src"))
+            // compare the counter against the length
+            if(imageCounter < image.dataset.imagenumber ){
+                imageCounter++;
+            }else if (imageCounter >= image.dataset.imagenumber ){
+                // rese when reaching the last image 
+                imageCounter = 1;
+                
+            }
+            console.log(imageCounter)
+    } 
+    
+    setInterval(imageSlide,3000)
+</script>
 
 {% endblock content %}
